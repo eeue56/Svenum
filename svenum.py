@@ -25,17 +25,34 @@ def fix_columns(column_numbers, columns):
 		for data in columns[number]:
 			new_data.append(shitty_hash(data, store))
 
-
 def save_columns(filename, columns):
 	with open(filename, 'wb') as f:
 		column_length = len(columns[0])
 		f.write('\n'.join(','.join(column[i] for column in columns)) for i in xrange(column_length) + '\n')
 
 
+def columns_that_need_fixing(columns):
+	column_numbers = []
+
+	for i, column in enumerate(columns):
+		for line in column:
+			try:
+				float(line)
+			except:
+				column_numbers.append(i)
+				continue
+
+	return column_numbers
+
 
 
 def main():
-	pass
+	filename = "dogs.csv"
+
+	columns = generate_columns(filename)
+	need_fixing = columns_that_need_fixing(columns)
+	columns = fix_columns(need_fixing, columns)
+	save_columns(filename, columns)
 
 def test():
 	pass
