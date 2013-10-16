@@ -29,6 +29,7 @@ def csv_split(line, splitter):
 
 
 def generate_columns(filename):
+	""" Generate the columns from the filename and return """
 	columns = None
 
 	with open(filename) as f:
@@ -44,6 +45,7 @@ def generate_columns(filename):
 	return columns
 
 def shitty_hash(value, store=[]):
+	""" Very shitty "hash" """
 	if value in store:
 		return store.index(value)
 	store.append(value)
