@@ -4,6 +4,8 @@ except:
 	xrange = range
 
 def csv_split(line, splitter):
+	""" Split the text on splitter, taking into account double quotes """
+
 	in_quote = False
 	out = []
 	current_stash = []
@@ -65,12 +67,14 @@ def fix_columns(column_numbers, columns):
 	return columns, columns_data
 
 def save_columns(filename, columns):
+	""" Save columns as csv """
 	with open(filename, 'w') as f:
 		column_length = len(columns[0])
 		f.write('\n'.join(','.join(str(column[i]) for column in columns) for i in xrange(column_length)))
 		f.write('\n')
 
 def write_enumstore(enum_store, filename='enums.dat'):
+	""" write the enum store to the file """
 	with open(filename, 'w') as f:
 		for column_number, store in enum_store.items():
 			f.write('{}\n'.format(column_number))
@@ -91,7 +95,6 @@ def columns_that_need_fixing(columns):
 				break
 
 	return column_numbers
-
 
 
 def main():
